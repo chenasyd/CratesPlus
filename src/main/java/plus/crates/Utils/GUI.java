@@ -171,13 +171,13 @@ public class GUI {
         if (page == 1 && getGoBackHandler() != null) {
             ItemStack back = new ItemStack(Material.ARROW);
             ItemMeta backMeta = back.getItemMeta();
-            backMeta.setDisplayName(ChatColor.YELLOW + "Go Back");
+            backMeta.setDisplayName(ChatColor.YELLOW + "返回");
             back.setItemMeta(backMeta);
             inventory.setItem(48, back);
         } else if (page > 1) {
             ItemStack prev = new ItemStack(Material.ARROW);
             ItemMeta prevMeta = prev.getItemMeta();
-            prevMeta.setDisplayName(ChatColor.YELLOW + "Previous Page");
+            prevMeta.setDisplayName(ChatColor.YELLOW + "上一页");
             prev.setItemMeta(prevMeta);
             inventory.setItem(48, prev);
         }
@@ -185,7 +185,7 @@ public class GUI {
         if (pages > page) {
             ItemStack prev = new ItemStack(Material.ARROW);
             ItemMeta prevMeta = prev.getItemMeta();
-            prevMeta.setDisplayName(ChatColor.YELLOW + "Next Page");
+            prevMeta.setDisplayName(ChatColor.YELLOW + "下一页");
             prev.setItemMeta(prevMeta);
             inventory.setItem(50, prev);
         }

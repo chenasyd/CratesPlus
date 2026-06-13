@@ -182,14 +182,14 @@ public class CrateHandler {
         KeyCrate crate = (KeyCrate) cratesPlus.getConfigHandler().getCrates().get(crateType.toLowerCase());
         if (crate == null) {
             if (offlinePlayer.isOnline())
-                ((Player) offlinePlayer).sendMessage(cratesPlus.getPluginPrefix() + ChatColor.RED + "Crate type: '" + crateType + "' does not exist");
+                ((Player) offlinePlayer).sendMessage(cratesPlus.getPluginPrefix() + ChatColor.RED + "宝箱类型: '" + crateType + "' 不存在");
             return;
         }
 
         Key key = crate.getKey();
         if (key == null) {
             if (offlinePlayer.isOnline()) {
-                ((Player) offlinePlayer).sendMessage(cratesPlus.getPluginPrefix() + ChatColor.RED + "Could not get key for crate: '" + crateType + "'");
+                ((Player) offlinePlayer).sendMessage(cratesPlus.getPluginPrefix() + ChatColor.RED + "无法获取宝箱的钥匙: '" + crateType + "'");
             }
             return;
         }
@@ -208,7 +208,7 @@ public class CrateHandler {
                 pendingKeys.put(player.getUniqueId(), keys);
                 updateKeysData(offlinePlayer.getUniqueId());
                 if (showMessage)
-                    MessageHandler.sendMessage(player, "&aYou're inventory is full, you can claim your keys later using /crate", crate, null);
+                    MessageHandler.sendMessage(player, "&a您的背包已满，您可以稍后使用 /crate 来领取钥匙", crate, null);
                 return;
             }
 
@@ -223,7 +223,7 @@ public class CrateHandler {
             }
 
             if (showMessage)
-                MessageHandler.sendMessage(player, "&aYou have been given a %crate% &acrate key", crate, null);
+                MessageHandler.sendMessage(player, "&a您已获得一个 %crate% &a宝箱钥匙", crate, null);
         } else {
             HashMap<String, Integer> keys = new HashMap<>();
             if (hasPendingKeys(offlinePlayer.getUniqueId()))
@@ -260,14 +260,14 @@ public class CrateHandler {
 
         ItemStack crateItem = new ItemStack(crate.getBlock(), 1, (short) crate.getBlockData());
         ItemMeta crateMeta = crateItem.getItemMeta();
-        crateMeta.setDisplayName(crate.getName(true) + " Crate");
+        crateMeta.setDisplayName(crate.getName(true) + " 宝箱");
         List<String> lore = new ArrayList<String>();
-        lore.add(ChatColor.GRAY + "Place this crate somewhere!");
+        lore.add(ChatColor.GRAY + "将此宝箱放置在某处！");
         lore.add("");
         crateMeta.setLore(lore);
         crateItem.setItemMeta(crateMeta);
         player.getInventory().addItem(crateItem);
-        player.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.GREEN + "You have been given a " + crate.getName(true) + ChatColor.GREEN + " crate");
+        player.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.GREEN + "您已获得一个 " + crate.getName(true) + ChatColor.GREEN + " 宝箱");
     }
 
     @Deprecated
@@ -346,7 +346,7 @@ public class CrateHandler {
                 ItemStack itemStack = new ItemStack(LegacyMaterial.EMPTY_MAP.getMaterial());
                 ItemMeta itemMeta = itemStack.getItemMeta();
                 List<String> lore = new ArrayList<String>();
-                lore.add(ChatColor.DARK_GRAY + "Crate Command");
+                lore.add(ChatColor.DARK_GRAY + "宝箱指令");
                 itemMeta.setLore(lore);
                 itemMeta.setDisplayName(ChatColor.RESET + name);
                 itemStack.setItemMeta(itemMeta);

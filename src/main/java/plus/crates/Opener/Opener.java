@@ -92,7 +92,7 @@ public abstract class Opener {
     public abstract void doReopen(Player player, Crate crate, Location blockLocation);
 
     public boolean doesSupport(Crate crate) {
-        getPlugin().getLogger().severe("This opener has not been updated to support CratesPlus v5.0+");
+        getPlugin().getLogger().severe("此开启方式尚未更新以支持 CratesPlus v5.0+");
         return false;
     }
 

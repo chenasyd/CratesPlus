@@ -1,11 +1,11 @@
 # [][][][][][][][][][][][][][][][][][][][][]
-#  CratesPlus V${project.version} Messages
+#  CratesPlus V${project.version} 消息配置
 # [][][][][][][][][][][][][][][][][][][][][]
 # ------------------------------------------
-# There are many placeholders that can now be used withing the config and messages file, placeholders are as followed:
-# - %name% - Replaces with the players name, Example: "Notch".
-# - %displayname% - Replaces with the players display name, Example: "[Owner] Notch".
-# - %uuid% - Replaces with the players UUID.
-# - %crate% - The crate types name.
-# - %prize% - The name of the winning.
-# - %percentage% - Percentage of the winning, useful for "Chance Message".
+# 现在可以在配置文件和消息文件中使用以下占位符:
+# - %name% - 替换为玩家名称，例如："Notch"。
+# - %displayname% - 替换为玩家的显示名称，例如："[Owner] Notch"。
+# - %uuid% - 替换为玩家的 UUID。
+# - %crate% - 宝箱类型的名称。
+# - %prize% - 奖励的名称。
+# - %percentage% - 奖励的百分比，用于"概率提示"。

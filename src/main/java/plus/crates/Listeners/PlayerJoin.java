@@ -22,12 +22,12 @@ public class PlayerJoin implements Listener {
                 event.getPlayer().sendMessage(cratesPlus.getUpdateMessage());
             }
             if (cratesPlus.getConfigBackup() != null && event.getPlayer().hasPermission("cratesplus.admin")) {
-                event.getPlayer().sendMessage(cratesPlus.getPluginPrefix() + ChatColor.GREEN + "Your config has been updated. Your old config was backed up to " + cratesPlus.getConfigBackup());
+                event.getPlayer().sendMessage(cratesPlus.getPluginPrefix() + ChatColor.GREEN + "您的配置已更新。旧配置已备份至 " + cratesPlus.getConfigBackup());
                 cratesPlus.setConfigBackup(null);
             }
             if (cratesPlus.getCrateHandler().hasPendingKeys(event.getPlayer().getUniqueId())) {
                 if (cratesPlus.getConfigHandler().getClaimMessageDelay() > -1) {
-                    Bukkit.getScheduler().runTaskLater(cratesPlus, () -> MessageHandler.sendMessage(event.getPlayer(), "&aYou currently have keys waiting to be claimed, use /crate to claim", null, null), cratesPlus.getConfigHandler().getClaimMessageDelay() > 0 ? (20 * cratesPlus.getConfigHandler().getClaimMessageDelay()) : 0);
+                    Bukkit.getScheduler().runTaskLater(cratesPlus, () -> MessageHandler.sendMessage(event.getPlayer(), "&a您目前有待领取的钥匙，使用 /crate 来领取", null, null), cratesPlus.getConfigHandler().getClaimMessageDelay() > 0 ? (20 * cratesPlus.getConfigHandler().getClaimMessageDelay()) : 0);
                 }
             }
         }, 1L);

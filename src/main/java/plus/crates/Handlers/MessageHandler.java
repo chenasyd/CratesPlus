@@ -41,17 +41,17 @@ public class MessageHandler {
             config.set("Messages Version", 2);
 
             HashMap<String, String> oldKeys = new HashMap<>();
-            oldKeys.put("Command No Permission", "&cYou do not have the correct permission to run this command");
-            oldKeys.put("Crate No Permission", "&cYou do not have the correct permission to use this crate");
-            oldKeys.put("Crate Open Without Key", "&cYou must be holding a %crate% &ckey to open this crate");
-            oldKeys.put("Key Given", "&aYou have been given a %crate% &acrate key");
-            oldKeys.put("Broadcast", "&d%displayname% &dopened a %crate% &dcrate");
-            oldKeys.put("Cant Place", "&cYou can not place crate keys");
-            oldKeys.put("Cant Drop", "&cYou can not drop crate keys");
-            oldKeys.put("Chance Message", "&d%percentage%% Chance");
-            oldKeys.put("Inventory Full Claim", "&aYou're inventory is full, you can claim your keys later using /crate");
-            oldKeys.put("Claim Join", "&aYou currently have keys waiting to be claimed, use /crate to claim");
-            oldKeys.put("Possible Wins Title", "Possible Wins:");
+            oldKeys.put("Command No Permission", "&c您没有正确的权限来执行此命令");
+            oldKeys.put("Crate No Permission", "&c您没有正确的权限来使用此宝箱");
+            oldKeys.put("Crate Open Without Key", "&c您必须手持 %crate% &c钥匙才能打开此宝箱");
+            oldKeys.put("Key Given", "&a您已获得一个 %crate% &a宝箱钥匙");
+            oldKeys.put("Broadcast", "&d%displayname% &d打开了一个 %crate% &d宝箱");
+            oldKeys.put("Cant Place", "&c您不能放置宝箱钥匙");
+            oldKeys.put("Cant Drop", "&c您不能丢弃宝箱钥匙");
+            oldKeys.put("Chance Message", "&d%percentage%% 概率");
+            oldKeys.put("Inventory Full Claim", "&a您的背包已满，您可以稍后使用 /crate 来领取钥匙");
+            oldKeys.put("Claim Join", "&a您目前有待领取的钥匙，使用 /crate 来领取");
+            oldKeys.put("Possible Wins Title", "可能获得的奖励：");
 
             oldKeys.forEach((key, value) -> {
                 if (config.isSet(key)) {

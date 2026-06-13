@@ -60,7 +60,7 @@ public class MysteryCrate extends Crate {
                 gui.addItem(itemStack, new GUI.ClickHandler() {
                     @Override
                     public void doClick(Player player, GUI gui) {
-                        player.sendMessage(ChatColor.YELLOW + "// TODO");
+                        player.sendMessage(ChatColor.YELLOW + "// 功能开发中");
                         player.sendMessage(ChatColor.AQUA + "#" + finalI);
                     }
                 });

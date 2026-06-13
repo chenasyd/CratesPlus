@@ -73,7 +73,7 @@ public abstract class Crate {
                 String path = "Crates." + name + ".Winnings." + id;
                 Winning winning = new Winning(this, path, cratesPlus, null);
                 if (!winning.isValid()) {
-                    Bukkit.getLogger().warning(path + " is an invalid winning.");
+                    Bukkit.getLogger().warning(path + " 是一个无效的奖励。");
                     continue;
                 }
                 totalPercentage = totalPercentage + winning.getPercentage();

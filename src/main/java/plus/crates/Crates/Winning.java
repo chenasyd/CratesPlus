@@ -38,7 +38,7 @@ public class Winning {
         this.crate = crate;
 
         if (configHandler != null && configHandler.isDebugMode()) {
-            cratesPlus.getLogger().info("Loading data for \"" + path + "\"");
+            cratesPlus.getLogger().info("正在加载 \"" + path + "\" 的数据");
         }
 
         FileConfiguration config = cratesPlus.getConfig();
@@ -91,7 +91,7 @@ public class Winning {
             }
 
             if (commands.isEmpty()) {
-                cratesPlus.getLogger().warning("No \"Commands\" found for " + path);
+                cratesPlus.getLogger().warning("在 " + path + " 中未找到\"Commands\"配置");
                 return;
             }
 
@@ -196,7 +196,7 @@ public class Winning {
                     level = Integer.valueOf(args[1]);
                 Enchantment enchantment1 = LinfootUtil.getEnchantmentFromNiceName(args[0].toUpperCase());
                 if (enchantment1 == null)
-                    Bukkit.getLogger().warning("Invalid enchantment \"" + args[0].toUpperCase() + "\" found for item \"" + ChatColor.stripColor(displayName) + "\"");
+                    Bukkit.getLogger().warning("在物品 \"" + ChatColor.stripColor(displayName) + "\" 中发现无效附魔 \"" + args[0].toUpperCase() + "\"");
                 else
                     winningItemStack.addUnsafeEnchantment(enchantment1, level);
             }
@@ -209,7 +209,7 @@ public class Winning {
         if (percentage > 0 && !crate.isHidePercentages()) {
             if (cratesPlus.getConfig().getBoolean("Chance Message Gap", true))
                 lore.add(ChatColor.LIGHT_PURPLE + "");
-            lore.add(MessageHandler.getMessage("&d%percentage%% Chance", null, crate, this).replaceAll("\\n", ""));
+            lore.add(MessageHandler.getMessage("&d%percentage%% 概率", null, crate, this).replaceAll("\\n", ""));
         }
         previewItemStackItemMeta.setLore(lore);
         previewItemStack.setItemMeta(previewItemStackItemMeta);
@@ -241,7 +241,7 @@ public class Winning {
         }
 
         if (crate.isBroadcast())
-            Bukkit.broadcastMessage(cratesPlus.getPluginPrefix() + MessageHandler.getMessage("&d%displayname% &dopened a %crate% &dcrate", player, crate, winning));
+            Bukkit.broadcastMessage(cratesPlus.getPluginPrefix() + MessageHandler.getMessage("&d%displayname% &d打开了一个 %crate% &d宝箱", player, crate, winning));
 
         if (crate.isFirework())
             cratesPlus.getCrateHandler().spawnFirework(player.getLocation());

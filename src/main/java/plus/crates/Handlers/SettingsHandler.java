@@ -35,7 +35,7 @@ public class SettingsHandler implements Listener {
     }
 
     public void setupSettingsInventory() {
-        settings = new GUI("CratesPlus Settings");
+        settings = new GUI("CratesPlus 设置");
 
         ItemStack itemStack;
         ItemMeta itemMeta;
@@ -43,7 +43,7 @@ public class SettingsHandler implements Listener {
 
         itemStack = new ItemStack(Material.CHEST);
         itemMeta = itemStack.getItemMeta();
-        itemMeta.setDisplayName(ChatColor.GREEN + "Edit Crates");
+        itemMeta.setDisplayName(ChatColor.GREEN + "编辑宝箱");
         lore = new ArrayList<>();
         lore.add("");
         itemMeta.setLore(lore);
@@ -65,7 +65,7 @@ public class SettingsHandler implements Listener {
 
         itemStack = new ItemStack(material);
         itemMeta = itemStack.getItemMeta();
-        itemMeta.setDisplayName(ChatColor.GREEN + "Reload Config");
+        itemMeta.setDisplayName(ChatColor.GREEN + "重新加载配置");
         lore = new ArrayList<>();
         lore.add("");
         itemMeta.setLore(lore);
@@ -75,13 +75,13 @@ public class SettingsHandler implements Listener {
             public void doClick(Player player, GUI gui) {
                 player.closeInventory();
                 cratesPlus.reloadConfig();
-                player.sendMessage(ChatColor.GREEN + "Reloaded config");
+                player.sendMessage(ChatColor.GREEN + "配置已重新加载");
             }
         });
     }
 
     public void setupCratesInventory() {
-        crates = new GUI("Crates");
+        crates = new GUI("宝箱列表");
 
         ItemStack itemStack;
         ItemMeta itemMeta;
@@ -115,17 +115,17 @@ public class SettingsHandler implements Listener {
     public void openCrateWinnings(final Player player, String crateName) {
         Crate crate = cratesPlus.getConfigHandler().getCrates().get(crateName.toLowerCase());
         if (crate == null) {
-            player.sendMessage(ChatColor.RED + "Unable to find " + crateName + " crate");
+            player.sendMessage(ChatColor.RED + "无法找到 " + crateName + " 宝箱");
             return;
         }
 
         if (crate.containsCommandItem()) {
-            player.sendMessage(ChatColor.RED + "You can not currently edit a crate in the GUI which has command items");
+            player.sendMessage(ChatColor.RED + "您当前无法在 GUI 中编辑含有指令物品的宝箱");
             player.closeInventory();
             return;
         }
 
-        final GUI gui = new GUI("Edit " + crate.getName(false) + " Crate Winnings");
+        final GUI gui = new GUI("编辑 " + crate.getName(false) + " 宝箱奖励");
 
         for (Winning winning : crate.getWinnings()) {
             gui.addItem(winning.getWinningItemStack());
@@ -141,18 +141,18 @@ public class SettingsHandler implements Listener {
             return; // TODO Error handling here
         }
 
-        final GUI gui = new GUI("Edit " + crate.getName(false) + " Crate");
+        final GUI gui = new GUI("编辑 " + crate.getName(false) + " 宝箱");
 
         ItemStack itemStack;
         ItemMeta itemMeta;
         List<String> lore;
 
 
-        // Rename Crate
+        // 重命名宝箱
 
         itemStack = new ItemStack(Material.NAME_TAG);
         itemMeta = itemStack.getItemMeta();
-        itemMeta.setDisplayName(ChatColor.GREEN + "Rename Crate");
+        itemMeta.setDisplayName(ChatColor.GREEN + "重命名宝箱");
         lore = new ArrayList<>();
         lore.add("");
         itemMeta.setLore(lore);
@@ -163,7 +163,7 @@ public class SettingsHandler implements Listener {
                 player.closeInventory();
                 renaming.put(player.getUniqueId(), crateName);
                 try {
-                    //Send fake sign cause 1.13
+                    // 发送虚假牌子（1.13+）
                     player.sendBlockChange(player.getLocation(), Material.valueOf("SIGN"), (byte) 0);
 
                     Constructor signConstructor = ReflectionUtil.getNMSClass("PacketPlayOutOpenSignEditor").getConstructor(ReflectionUtil.getNMSClass("BlockPosition"));
@@ -173,18 +173,18 @@ public class SettingsHandler implements Listener {
 
                     player.sendBlockChange(player.getLocation(), player.getLocation().getBlock().getType(), player.getLocation().getBlock().getData());
                 } catch (Exception e) {
-                    player.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.RED + "Please use /crate rename <old> <new>");
+                    player.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.RED + "请使用 /crate rename <旧名称> <新名称>");
                     renaming.remove(player.getUniqueId());
                 }
             }
         });
 
 
-        // Edit Crate Winnings
+        // 编辑宝箱奖励
 
         itemStack = new ItemStack(Material.DIAMOND);
         itemMeta = itemStack.getItemMeta();
-        itemMeta.setDisplayName(ChatColor.RED + "Edit Crate Winnings");
+        itemMeta.setDisplayName(ChatColor.RED + "编辑宝箱奖励");
         lore = new ArrayList<>();
         lore.add("");
         itemMeta.setLore(lore);
@@ -192,18 +192,18 @@ public class SettingsHandler implements Listener {
         gui.setItem(2, itemStack, new GUI.ClickHandler() {
             @Override
             public void doClick(Player player, GUI gui) {
-                player.sendMessage(ChatColor.RED + "This feature is currently disabled!");
+                player.sendMessage(ChatColor.RED + "此功能目前已被禁用！");
 //                GUI.ignoreClosing.add(player.getUniqueId());
 //                openCrateWinnings(player, crateName);
             }
         });
 
 
-        // Edit Crate Color
+        // 编辑宝箱颜色
 
         itemStack = new ItemStack(LegacyMaterial.WOOL.getMaterial(), 1, (short) 3);
         itemMeta = itemStack.getItemMeta();
-        itemMeta.setDisplayName(ChatColor.GREEN + "Edit Crate Color");
+        itemMeta.setDisplayName(ChatColor.GREEN + "编辑宝箱颜色");
         lore = new ArrayList<>();
         lore.add("");
         itemMeta.setLore(lore);
@@ -217,7 +217,7 @@ public class SettingsHandler implements Listener {
         });
 
 
-        // Delete Crate
+        // 删除宝箱
 
         Material material;
 
@@ -229,7 +229,7 @@ public class SettingsHandler implements Listener {
 
         itemStack = new ItemStack(material);
         itemMeta = itemStack.getItemMeta();
-        itemMeta.setDisplayName(ChatColor.GREEN + "Delete Crate");
+        itemMeta.setDisplayName(ChatColor.GREEN + "删除宝箱");
         lore = new ArrayList<>();
         lore.add("");
         itemMeta.setLore(lore);
@@ -247,101 +247,101 @@ public class SettingsHandler implements Listener {
     }
 
     private void openCrateColor(final Player player, final Crate crate) {
-        GUI gui = new GUI("Edit Crate Color");
+        GUI gui = new GUI("编辑宝箱颜色");
 
         ItemStack aqua = new ItemStack(LegacyMaterial.WOOL.getMaterial(), 1, (short) 3);
         ItemMeta aquaMeta = aqua.getItemMeta();
-        aquaMeta.setDisplayName(ChatColor.AQUA + "Aqua");
+        aquaMeta.setDisplayName(ChatColor.AQUA + "天蓝");
         aqua.setItemMeta(aquaMeta);
         gui.addItem(aqua, getColorClickHandler(crate, ChatColor.AQUA));
 
         ItemStack black = new ItemStack(LegacyMaterial.WOOL.getMaterial(), 1, (short) 15);
         ItemMeta blackMeta = black.getItemMeta();
-        blackMeta.setDisplayName(ChatColor.BLACK + "Black");
+        blackMeta.setDisplayName(ChatColor.BLACK + "黑色");
         black.setItemMeta(blackMeta);
         gui.addItem(black, getColorClickHandler(crate, ChatColor.BLACK));
 
         ItemStack blue = new ItemStack(LegacyMaterial.WOOL.getMaterial(), 1, (short) 9);
         ItemMeta blueMeta = blue.getItemMeta();
-        blueMeta.setDisplayName(ChatColor.BLUE + "Blue");
+        blueMeta.setDisplayName(ChatColor.BLUE + "蓝色");
         blue.setItemMeta(blueMeta);
         gui.addItem(blue, getColorClickHandler(crate, ChatColor.BLUE));
 
         ItemStack darkAqua = new ItemStack(LegacyMaterial.WOOL.getMaterial(), 1, (short) 3);
         ItemMeta darkAquaMeta = darkAqua.getItemMeta();
-        darkAquaMeta.setDisplayName(ChatColor.DARK_AQUA + "Dark Aqua");
+        darkAquaMeta.setDisplayName(ChatColor.DARK_AQUA + "深青");
         darkAqua.setItemMeta(darkAquaMeta);
         gui.addItem(darkAqua, getColorClickHandler(crate, ChatColor.DARK_AQUA));
 
         ItemStack darkBlue = new ItemStack(LegacyMaterial.WOOL.getMaterial(), 1, (short) 11);
         ItemMeta darkBlueMeta = darkBlue.getItemMeta();
-        darkBlueMeta.setDisplayName(ChatColor.DARK_BLUE + "Dark Blue");
+        darkBlueMeta.setDisplayName(ChatColor.DARK_BLUE + "深蓝");
         darkBlue.setItemMeta(darkBlueMeta);
         gui.addItem(darkBlue, getColorClickHandler(crate, ChatColor.DARK_BLUE));
 
         ItemStack darkGray = new ItemStack(LegacyMaterial.WOOL.getMaterial(), 1, (short) 7);
         ItemMeta darkGrayMeta = darkGray.getItemMeta();
-        darkGrayMeta.setDisplayName(ChatColor.DARK_GRAY + "Dark Gray");
+        darkGrayMeta.setDisplayName(ChatColor.DARK_GRAY + "深灰");
         darkGray.setItemMeta(darkGrayMeta);
         gui.addItem(darkGray, getColorClickHandler(crate, ChatColor.DARK_GRAY));
 
         ItemStack darkGreen = new ItemStack(LegacyMaterial.WOOL.getMaterial(), 1, (short) 13);
         ItemMeta darkGreenMeta = darkGreen.getItemMeta();
-        darkGreenMeta.setDisplayName(ChatColor.DARK_GREEN + "Dark Green");
+        darkGreenMeta.setDisplayName(ChatColor.DARK_GREEN + "深绿");
         darkGreen.setItemMeta(darkGreenMeta);
         gui.addItem(darkGreen, getColorClickHandler(crate, ChatColor.DARK_GREEN));
 
         ItemStack darkPurple = new ItemStack(LegacyMaterial.WOOL.getMaterial(), 1, (short) 10);
         ItemMeta darkPurpleMeta = darkPurple.getItemMeta();
-        darkPurpleMeta.setDisplayName(ChatColor.DARK_PURPLE + "Dark Purple");
+        darkPurpleMeta.setDisplayName(ChatColor.DARK_PURPLE + "深紫");
         darkPurple.setItemMeta(darkPurpleMeta);
         gui.addItem(darkPurple, getColorClickHandler(crate, ChatColor.DARK_PURPLE));
 
         ItemStack darkRed = new ItemStack(LegacyMaterial.WOOL.getMaterial(), 1, (short) 14);
         ItemMeta darkRedMeta = darkRed.getItemMeta();
-        darkRedMeta.setDisplayName(ChatColor.DARK_RED + "Dark Red");
+        darkRedMeta.setDisplayName(ChatColor.DARK_RED + "深红");
         darkRed.setItemMeta(darkRedMeta);
         gui.addItem(darkRed, getColorClickHandler(crate, ChatColor.DARK_RED));
 
         ItemStack gold = new ItemStack(LegacyMaterial.WOOL.getMaterial(), 1, (short) 1);
         ItemMeta goldMeta = gold.getItemMeta();
-        goldMeta.setDisplayName(ChatColor.GOLD + "Gold");
+        goldMeta.setDisplayName(ChatColor.GOLD + "金色");
         gold.setItemMeta(goldMeta);
         gui.addItem(gold, getColorClickHandler(crate, ChatColor.GOLD));
 
         ItemStack gray = new ItemStack(LegacyMaterial.WOOL.getMaterial(), 1, (short) 8);
         ItemMeta grayMeta = gray.getItemMeta();
-        grayMeta.setDisplayName(ChatColor.GRAY + "Gray");
+        grayMeta.setDisplayName(ChatColor.GRAY + "灰色");
         gray.setItemMeta(grayMeta);
         gui.addItem(gray, getColorClickHandler(crate, ChatColor.GRAY));
 
         ItemStack green = new ItemStack(LegacyMaterial.WOOL.getMaterial(), 1, (short) 5);
         ItemMeta greenMeta = gray.getItemMeta();
-        greenMeta.setDisplayName(ChatColor.GREEN + "Green");
+        greenMeta.setDisplayName(ChatColor.GREEN + "绿色");
         green.setItemMeta(greenMeta);
         gui.addItem(green, getColorClickHandler(crate, ChatColor.GREEN));
 
         ItemStack lightPurple = new ItemStack(LegacyMaterial.WOOL.getMaterial(), 1, (short) 2);
         ItemMeta lightPurpleMeta = lightPurple.getItemMeta();
-        lightPurpleMeta.setDisplayName(ChatColor.LIGHT_PURPLE + "Light Purple");
+        lightPurpleMeta.setDisplayName(ChatColor.LIGHT_PURPLE + "浅紫");
         lightPurple.setItemMeta(lightPurpleMeta);
         gui.addItem(lightPurple, getColorClickHandler(crate, ChatColor.LIGHT_PURPLE));
 
         ItemStack red = new ItemStack(LegacyMaterial.WOOL.getMaterial(), 1, (short) 14);
         ItemMeta redMeta = red.getItemMeta();
-        redMeta.setDisplayName(ChatColor.RED + "Red");
+        redMeta.setDisplayName(ChatColor.RED + "红色");
         red.setItemMeta(redMeta);
         gui.addItem(red, getColorClickHandler(crate, ChatColor.RED));
 
         ItemStack white = new ItemStack(LegacyMaterial.WOOL.getMaterial(), 1, (short) 0);
         ItemMeta whiteMeta = white.getItemMeta();
-        whiteMeta.setDisplayName(ChatColor.WHITE + "White");
+        whiteMeta.setDisplayName(ChatColor.WHITE + "白色");
         white.setItemMeta(whiteMeta);
         gui.addItem(white, getColorClickHandler(crate, ChatColor.WHITE));
 
         ItemStack yellow = new ItemStack(LegacyMaterial.WOOL.getMaterial(), 1, (short) 4);
         ItemMeta yellowMeta = yellow.getItemMeta();
-        yellowMeta.setDisplayName(ChatColor.YELLOW + "Yellow");
+        yellowMeta.setDisplayName(ChatColor.YELLOW + "黄色");
         yellow.setItemMeta(yellowMeta);
         gui.addItem(yellow, getColorClickHandler(crate, ChatColor.YELLOW));
 
@@ -354,14 +354,14 @@ public class SettingsHandler implements Listener {
             public void doClick(Player player, GUI gui) {
                 GUI.ignoreClosing.add(player.getUniqueId());
                 crate.setColor(color);
-                player.sendMessage(color.name());
+                player.sendMessage("颜色已设置为 " + color + color.name());
                 openCrate(player, crate.getName());
             }
         };
     }
 
     private void confirmDelete(final Player player, final Crate crate) {
-        final GUI gui = new GUI("Confirm Delete of \"" + crate.getName(false) + "\"");
+        final GUI gui = new GUI("确认删除 \"" + crate.getName(false) + "\"");
 
         ItemStack crateItem = new ItemStack(crate.getBlock(), 1, (short) crate.getBlockData());
         ItemMeta crateMeta = crateItem.getItemMeta();
@@ -371,7 +371,7 @@ public class SettingsHandler implements Listener {
 
         ItemStack cancel = new ItemStack(LegacyMaterial.WOOL.getMaterial(), 1, (short) 14);
         ItemMeta cancelMeta = cancel.getItemMeta();
-        cancelMeta.setDisplayName(ChatColor.RED + "Cancel");
+        cancelMeta.setDisplayName(ChatColor.RED + "取消");
         cancel.setItemMeta(cancelMeta);
         gui.setItem(16, cancel, new GUI.ClickHandler() {
             @Override
@@ -383,13 +383,13 @@ public class SettingsHandler implements Listener {
 
         ItemStack confirm = new ItemStack(LegacyMaterial.WOOL.getMaterial(), 1, (short) 5);
         ItemMeta confirmMeta = confirm.getItemMeta();
-        confirmMeta.setDisplayName(ChatColor.GREEN + "Confirm");
+        confirmMeta.setDisplayName(ChatColor.GREEN + "确认");
         confirm.setItemMeta(confirmMeta);
         gui.setItem(18, confirm, new GUI.ClickHandler() {
             @Override
             public void doClick(Player player, GUI gui) {
                 player.closeInventory();
-                player.sendMessage("WILL DELETE");
+                player.sendMessage("即将删除");
             }
         });
 

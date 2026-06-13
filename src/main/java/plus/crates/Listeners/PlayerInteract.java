@@ -40,9 +40,9 @@ public class PlayerInteract implements Listener {
                 return;
             Chest chest = (Chest) event.getClickedBlock().getState();
             String title = chest.getCustomName();
-            if (title == null || !title.contains(" Crate"))
+            if (title == null || !title.contains(" 宝箱"))
                 return;
-            crateType = ChatColor.stripColor(title.replaceAll(" Crate", ""));
+            crateType = ChatColor.stripColor(title.replaceAll(" 宝箱", ""));
         } else {
             crateType = event.getClickedBlock().getMetadata("CrateType").get(0).asString();
         }
@@ -65,7 +65,7 @@ public class PlayerInteract implements Listener {
 
         if (crate.getPermission() != null && !player.hasPermission(crate.getPermission())) {
             event.setCancelled(true);
-            MessageHandler.sendMessage(player, "&cYou do not have the correct permission to use this crate", crate, null);
+            MessageHandler.sendMessage(player, "&c您没有正确的权限来使用此宝箱", crate, null);
             return;
         }
         String title = ChatColor.stripColor(keyCrate.getKey().getName());
@@ -93,7 +93,7 @@ public class PlayerInteract implements Listener {
                 event.setCancelled(true);
 
                 if (player.getInventory().firstEmpty() == -1) {
-                    player.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.RED + "You can't open a Crate while your inventory is full");
+                    player.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.RED + "您的背包已满，无法打开宝箱");
                     return;
                 }
 
@@ -120,7 +120,7 @@ public class PlayerInteract implements Listener {
                 CrateOpenEvent crateOpenEvent = new CrateOpenEvent(player, keyCrate, event.getClickedBlock().getLocation(), cratesPlus);
                 crateOpenEvent.doEvent();
             } else {
-                MessageHandler.sendMessage(player, "&cYou must be holding a %crate% &ckey to open this crate", crate, null);
+                MessageHandler.sendMessage(player, "&c您必须手持 %crate% &c钥匙才能打开此宝箱", crate, null);
                 if (keyCrate.getKnockback() != 0) {
                     player.setVelocity(player.getLocation().getDirection().multiply(-keyCrate.getKnockback()));
                 }

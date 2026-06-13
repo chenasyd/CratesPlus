@@ -50,7 +50,7 @@ public class CratesPlus extends JavaPlugin implements Listener {
         Pattern pattern = Pattern.compile("(^[^\\-]*)");
         Matcher matcher = pattern.matcher(server.getBukkitVersion());
         if (!matcher.find()) {
-            getLogger().severe("Could not find Bukkit version... Disabling plugin");
+            getLogger().severe("无法找到 Bukkit 版本... 正在禁用插件");
             setEnabled(false);
             return;
         }
@@ -61,7 +61,7 @@ public class CratesPlus extends JavaPlugin implements Listener {
 
         if (LinfootUtil.versionCompare(bukkitVersion, "1.14.2") > 0) {
             // This means the plugin is using something newer than the latest tested build... we'll show a warning but carry on as usual
-            getLogger().warning("CratesPlus has not yet been officially tested with Bukkit " + bukkitVersion + " but should still work");
+            getLogger().warning("CratesPlus 尚未在 Bukkit " + bukkitVersion + " 上进行官方测试，但应该仍然可以正常使用");
         }
 
         if (LinfootUtil.versionCompare(bukkitVersion, "1.9") > -1) {
@@ -72,10 +72,10 @@ public class CratesPlus extends JavaPlugin implements Listener {
             version_util = new Version_1_8(this);
         } else if (LinfootUtil.versionCompare(bukkitVersion, "1.7") > -1) {
             // Use Default Util
-            getLogger().warning("CratesPlus does NOT fully support Bukkit 1.7, if you have issues please report them but they may not be fixed");
+            getLogger().warning("CratesPlus 不完全支持 Bukkit 1.7，如果您遇到问题请报告，但可能不会修复");
             version_util = new Version_Util(this);
         } else {
-            getLogger().severe("CratesPlus does NOT support Bukkit " + bukkitVersion + ", if you believe this is an error please let me know");
+            getLogger().severe("CratesPlus 不支持 Bukkit " + bukkitVersion + "，如果您认为这是错误请联系我");
             if (!getConfig().isSet("Ignore Version") || !getConfig().getBoolean("Ignore Version")) { // People should only ignore this in the case of an error, doing an ignore on a unsupported version could break something
                 setEnabled(false);
                 return;
@@ -93,7 +93,7 @@ public class CratesPlus extends JavaPlugin implements Listener {
         try {
             storageType = StorageHandler.StorageType.valueOf(getConfig().getString("Storage Type", "FLAT").toUpperCase());
         } catch (Exception e) {
-            getLogger().warning(getConfig().getString("Storage Type", "FLAT") + " is not a valid storage type! Falling back to flat!");
+            getLogger().warning(getConfig().getString("Storage Type", "FLAT") + " 不是有效的存储类型！将回退到 FLAT！");
         }
         storageHandler = new StorageHandler(this, storageType);
 
@@ -148,29 +148,29 @@ public class CratesPlus extends JavaPlugin implements Listener {
 
         loadMetaData();
 
-        console.sendMessage(ChatColor.AQUA + getDescription().getName() + " Version " + getDescription().getVersion());
-        if (getDescription().getVersion().contains("SNAPSHOT")) { // Added this because some people didn't really understand what a "snapshot" is...
-            console.sendMessage(ChatColor.RED + "Warning: You are running a snapshot build of CratesPlus");
-            console.sendMessage(ChatColor.RED + "It is advised that you do NOT run this on a production server!");
+        console.sendMessage(ChatColor.AQUA + getDescription().getName() + " 版本 " + getDescription().getVersion());
+        if (getDescription().getVersion().contains("SNAPSHOT")) { // 添加这个是因为有些人不太理解什么是"snapshot"...
+            console.sendMessage(ChatColor.RED + "警告：您正在运行 CratesPlus 的快照版本");
+            console.sendMessage(ChatColor.RED + "建议您不要在正式服务器上运行此版本！");
         }
 
         switch (getHologramHandler().getHologramPlugin()) {
             default:
             case NONE:
-                console.sendMessage(ChatColor.RED + "Unable to find compatible Hologram plugin, holograms will not work!");
+                console.sendMessage(ChatColor.RED + "未找到兼容的全息插件，全息显示将无法使用！");
                 break;
             case HOLOGRAPHIC_DISPLAYS:
-                console.sendMessage(ChatColor.GREEN + "HolographicDisplays was found, hooking in!");
+                console.sendMessage(ChatColor.GREEN + "已找到 HolographicDisplays，正在接入！");
                 break;
             case INDIVIDUAL_HOLOGRAMS:
-                console.sendMessage(ChatColor.GREEN + "IndividualHolograms was found, hooking in!");
+                console.sendMessage(ChatColor.GREEN + "已找到 IndividualHolograms，正在接入！");
                 break;
         }
 
         if (configBackup != null && Bukkit.getOnlinePlayers().size() > 0) {
             for (Player player : Bukkit.getOnlinePlayers()) {
                 if (player.hasPermission("cratesplus.admin")) {
-                    player.sendMessage(pluginPrefix + ChatColor.GREEN + "Your config has been updated. Your old config was backed up to " + configBackup);
+                    player.sendMessage(pluginPrefix + ChatColor.GREEN + "您的配置已更新。旧配置已备份至 " + configBackup);
                     configBackup = null;
                 }
             }
@@ -228,30 +228,30 @@ public class CratesPlus extends JavaPlugin implements Listener {
         String branch = updateBranch.toLowerCase();
 
         if (branch.equalsIgnoreCase("snapshot")) {
-            console.sendMessage(ChatColor.RED + "WARNING: Snapshot updates are not recommended on production servers");
+            console.sendMessage(ChatColor.RED + "警告：不建议在正式服务器上使用快照版本更新");
         }
-        console.sendMessage(ChatColor.GREEN + "Checking for updates via " + branch + " branch...");
+        console.sendMessage(ChatColor.GREEN + "正在通过 " + branch + " 分支检查更新...");
         final LinfootUpdater updater = new LinfootUpdater(this, branch);
         final LinfootUpdater.UpdateResult snapShotResult = updater.getResult();
         switch (snapShotResult) {
             default:
             case FAILED:
                 updateAvailable = false;
-                updateMessage = pluginPrefix + "Failed to check for updates. Will try again later.";
-                getServer().getScheduler().runTaskLaterAsynchronously(this, () -> checkUpdate(console), 60 * (60 * 20L)); // Checks again an hour later
+                updateMessage = pluginPrefix + "检查更新失败。稍后将会重试。";
+                getServer().getScheduler().runTaskLaterAsynchronously(this, () -> checkUpdate(console), 60 * (60 * 20L)); // 一小时后再次检查
                 break;
             case NO_UPDATE:
                 updateAvailable = false;
-                updateMessage = pluginPrefix + "No update was found, you are running the latest version. Will check again later.";
+                updateMessage = pluginPrefix + "未找到更新，您正在运行最新版本。稍后将会再次检查。";
                 getServer().getScheduler().runTaskLaterAsynchronously(this, () -> checkUpdate(console), 60 * (60 * 20L)); // Checks again an hour later
                 break;
             case SNAPSHOT_UPDATE_AVAILABLE:
                 updateAvailable = true;
-                updateMessage = pluginPrefix + "A snapshot update for CratesPlus is available, new version is " + updater.getVersion() + ". Your installed version is " + getDescription().getVersion() + ".\nPlease update to the latest version :)";
+                updateMessage = pluginPrefix + "CratesPlus 的快照更新可用，新版本为 " + updater.getVersion() + "。您当前的版本为 " + getDescription().getVersion() + "。\n请更新到最新版本 :)";
                 break;
             case UPDATE_AVAILABLE:
                 updateAvailable = true;
-                updateMessage = pluginPrefix + "An update for CratesPlus is available, new version is " + updater.getVersion() + ". Your installed version is " + getDescription().getVersion() + ".\nPlease update to the latest version :)";
+                updateMessage = pluginPrefix + "CratesPlus 的更新可用，新版本为 " + updater.getVersion() + "。您当前的版本为 " + getDescription().getVersion() + "。\n请更新到最新版本 :)";
                 break;
         }
 
@@ -304,7 +304,7 @@ public class CratesPlus extends JavaPlugin implements Listener {
                     locationObj = new Location(Bukkit.getWorld(strings.get(0)), Double.parseDouble(strings.get(1)), Double.parseDouble(strings.get(2)), Double.parseDouble(strings.get(3)));
                     Block block = locationObj.getBlock();
                     if (block == null || block.getType().equals(Material.AIR)) {
-                        getLogger().warning("No block found at " + location + " removing from data.yml");
+                        getLogger().warning("在 " + location + " 处未找到方块，正在从 data.yml 中移除");
                         keyCrate.removeFromConfig(locationObj);
                         continue;
                     }

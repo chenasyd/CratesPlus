@@ -56,7 +56,7 @@ public class DropCrate extends SupplyCrate implements Listener {
     private void startTimer() {
         Integer timer = randInt(minSpawnInterval, maxSpawnInterval);
         // TODO Use a debug option to show this?
-        getCratesPlus().getLogger().info("Will attempt to drop crate \"" + getName() + "\" in " + timer + " seconds!");
+        getCratesPlus().getLogger().info("将在 " + timer + " 秒后尝试投放宝箱 \"" + getName() + "\"！");
         // TODO Should we validate the config first? I feel like we should...
         Bukkit.getScheduler().runTaskLater(getCratesPlus(), this::spawnCrate, 20L * timer);
     }
@@ -92,7 +92,7 @@ public class DropCrate extends SupplyCrate implements Listener {
             location.getBlock().setType(getBlock());
             // TODO idk how to handle the below, is it even needed with 1.13? So reflection if thats the case...
 //            location.getBlock().setData((byte) getBlockData());
-            System.out.println("Crate dropped at " + location.toString());
+            System.out.println("宝箱已投放在 " + location.toString());
             drops.add(location);
             // TODO Broadcast, populate and what not
 

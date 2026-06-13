@@ -64,7 +64,7 @@ public class SupplyCrate extends Crate {
         Player player = (Player) offlinePlayer;
         if (player.getInventory().firstEmpty() == -1) {
             // TODO Inventory full, do something for this!
-            player.sendMessage(ChatColor.RED + "Inventory full, I'll do something for this soon...");
+            player.sendMessage(ChatColor.RED + "背包已满，即将对此进行改进...");
             return false;
         } else {
             player.getInventory().addItem(getCrateItemStack(amount));
@@ -129,7 +129,7 @@ public class SupplyCrate extends Crate {
         // TODO add data ID support
         ItemStack itemStack = new ItemStack(getBlock(), amount, (short) getBlockData());
         ItemMeta itemMeta = itemStack.getItemMeta();
-        itemMeta.setDisplayName(getName(true) + " Crate");
+        itemMeta.setDisplayName(getName(true) + " 宝箱");
         itemMeta.setLore(getLore());
         itemStack.setItemMeta(itemMeta);
         return itemStack;
@@ -138,7 +138,7 @@ public class SupplyCrate extends Crate {
     private List<String> getLore() {
         if (this.lore == null || this.lore.size() == 0) {
             this.lore = new ArrayList<>();
-            this.lore.add(ChatColor.GRAY + "Place this crate to open!");
+            this.lore.add(ChatColor.GRAY + "放置此宝箱来打开！");
             this.lore.add("");
         }
         return this.lore;

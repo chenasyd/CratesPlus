@@ -50,8 +50,8 @@ public class Key {
 
     public List<String> getLore() {
         if (this.lore.isEmpty()) {
-            this.lore.add(ChatColor.GRAY + "Right-Click on a \"" + getCrate().getName(true) + ChatColor.GRAY + "\" crate");
-            this.lore.add(ChatColor.GRAY + "to win an item!");
+            this.lore.add(ChatColor.GRAY + "对 \"" + getCrate().getName(true) + ChatColor.GRAY + "\" 宝箱右键点击");
+            this.lore.add(ChatColor.GRAY + "来赢取一个物品！");
             this.lore.add("");
         }
         return this.lore;

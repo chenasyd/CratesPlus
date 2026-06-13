@@ -43,62 +43,62 @@ public class CrateCommand implements CommandExecutor {
 
         if (sender instanceof Player && !sender.hasPermission("cratesplus.admin")) {
             if (args.length == 0 || (args.length > 0 && args[0].equalsIgnoreCase("claim"))) {
-                // Assume player and show "claim" GUI
+                // 假设是玩家，显示"领取" GUI
                 doClaim((Player) sender);
                 return true;
             }
-            sender.sendMessage(cratesPlus.getPluginPrefix() + MessageHandler.getMessage("&cYou do not have the correct permission to run this command", (Player) sender, null, null));
+            sender.sendMessage(cratesPlus.getPluginPrefix() + MessageHandler.getMessage("&c你没有正确的权限来执行此命令", (Player) sender, null, null));
             return false;
         }
 
         if (args.length >= 1) {
             switch (args[0].toLowerCase()) {
                 default:
-                    sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.RED + "Unknown arg");
+                    sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.RED + "未知参数");
                     break;
                 case "testmessages":
                     MessageHandler.testMessages = !MessageHandler.testMessages;
-                    sender.sendMessage(ChatColor.GREEN + "Test Messages " + (MessageHandler.testMessages ? "ENABLED" : "DISABLED"));
+                    sender.sendMessage(ChatColor.GREEN + "测试消息 " + (MessageHandler.testMessages ? "已启用" : "已禁用"));
                     break;
                 case "testeggs":
                     Player player = null;
                     if (sender instanceof Player)
                         player = (Player) sender;
 
-                    sender.sendMessage(ChatColor.AQUA + "Creating creeper egg...");
+                    sender.sendMessage(ChatColor.AQUA + "正在创建苦力怕刷怪蛋...");
                     ItemStack itemStack = cratesPlus.getVersion_util().getSpawnEgg(EntityType.CREEPER, 1);
-                    sender.sendMessage(ChatColor.AQUA + "Testing creeper egg...");
+                    sender.sendMessage(ChatColor.AQUA + "正在测试苦力怕刷怪蛋...");
                     SpawnEggNBT spawnEggNBT = SpawnEggNBT.fromItemStack(itemStack);
                     if (spawnEggNBT.getSpawnedType().equals(EntityType.CREEPER)) {
-                        sender.sendMessage(ChatColor.GREEN + "Creeper egg successful");
+                        sender.sendMessage(ChatColor.GREEN + "苦力怕刷怪蛋测试成功");
                         if (player != null)
                             player.getInventory().addItem(itemStack);
                     } else {
-                        sender.sendMessage(ChatColor.RED + "Creeper egg failed, please post console on GitHub");
+                        sender.sendMessage(ChatColor.RED + "苦力怕刷怪蛋测试失败，请在 GitHub 上提交控制台信息");
                     }
 
-                    sender.sendMessage(ChatColor.AQUA + "Creating spider egg...");
+                    sender.sendMessage(ChatColor.AQUA + "正在创建蜘蛛刷怪蛋...");
                     itemStack = cratesPlus.getVersion_util().getSpawnEgg(EntityType.SPIDER, 2);
-                    sender.sendMessage(ChatColor.AQUA + "Testing spider egg...");
+                    sender.sendMessage(ChatColor.AQUA + "正在测试蜘蛛刷怪蛋...");
                     spawnEggNBT = SpawnEggNBT.fromItemStack(itemStack);
                     if (spawnEggNBT.getSpawnedType().equals(EntityType.SPIDER)) {
-                        sender.sendMessage(ChatColor.GREEN + "Spider egg successful");
+                        sender.sendMessage(ChatColor.GREEN + "蜘蛛刷怪蛋测试成功");
                         if (player != null)
                             player.getInventory().addItem(itemStack);
                     } else {
-                        sender.sendMessage(ChatColor.RED + "Spider egg failed, please post console on GitHub");
+                        sender.sendMessage(ChatColor.RED + "蜘蛛刷怪蛋测试失败，请在 GitHub 上提交控制台信息");
                     }
 
-                    sender.sendMessage(ChatColor.AQUA + "Creating silverfish egg...");
+                    sender.sendMessage(ChatColor.AQUA + "正在创建蠹虫刷怪蛋...");
                     itemStack = cratesPlus.getVersion_util().getSpawnEgg(EntityType.SILVERFISH, 3);
-                    sender.sendMessage(ChatColor.AQUA + "Testing silverfish egg...");
+                    sender.sendMessage(ChatColor.AQUA + "正在测试蠹虫刷怪蛋...");
                     spawnEggNBT = SpawnEggNBT.fromItemStack(itemStack);
                     if (spawnEggNBT.getSpawnedType().equals(EntityType.SILVERFISH)) {
-                        sender.sendMessage(ChatColor.GREEN + "Silverfish egg successful");
+                        sender.sendMessage(ChatColor.GREEN + "蠹虫刷怪蛋测试成功");
                         if (player != null)
                             player.getInventory().addItem(itemStack);
                     } else {
-                        sender.sendMessage(ChatColor.RED + "Silverfish egg failed, please post console on GitHub");
+                        sender.sendMessage(ChatColor.RED + "蠹虫刷怪蛋测试失败，请在 GitHub 上提交控制台信息");
                     }
                     break;
                 case "claim":
@@ -107,45 +107,45 @@ public class CrateCommand implements CommandExecutor {
                     }
                     break;
                 case "debug":
-                    sender.sendMessage(ChatColor.AQUA + "Gathering debug data...");
+                    sender.sendMessage(ChatColor.AQUA + "正在收集调试数据...");
 
                     Bukkit.getScheduler().runTaskAsynchronously(cratesPlus, () -> {
-                        sender.sendMessage(ChatColor.AQUA + "Uploading config.yml...");
+                        sender.sendMessage(ChatColor.AQUA + "正在上传 config.yml...");
                         String configLink = cratesPlus.uploadConfig();
-                        sender.sendMessage(ChatColor.AQUA + "Uploaded config.yml");
+                        sender.sendMessage(ChatColor.AQUA + "已上传 config.yml");
 
-                        sender.sendMessage(ChatColor.AQUA + "Uploading data.yml...");
+                        sender.sendMessage(ChatColor.AQUA + "正在上传 data.yml...");
                         String dataLink = cratesPlus.uploadData();
-                        sender.sendMessage(ChatColor.AQUA + "Uploaded data.yml");
+                        sender.sendMessage(ChatColor.AQUA + "已上传 data.yml");
 
-                        sender.sendMessage(ChatColor.AQUA + "Uploading messages.yml...");
+                        sender.sendMessage(ChatColor.AQUA + "正在上传 messages.yml...");
                         String messagesLink = cratesPlus.uploadMessages();
-                        sender.sendMessage(ChatColor.AQUA + "Uploaded messages.yml");
+                        sender.sendMessage(ChatColor.AQUA + "已上传 messages.yml");
 
-                        sender.sendMessage(ChatColor.AQUA + "Generating plugin list...");
+                        sender.sendMessage(ChatColor.AQUA + "正在生成插件列表...");
                         String plugins = "";
                         for (Plugin plugin : Bukkit.getPluginManager().getPlugins()) {
-                            plugins += plugin.getName() + " - Version: " + plugin.getDescription().getVersion() + "\n";
+                            plugins += plugin.getName() + " - 版本: " + plugin.getDescription().getVersion() + "\n";
                         }
-                        sender.sendMessage(ChatColor.AQUA + "Completed plugin list");
+                        sender.sendMessage(ChatColor.AQUA + "插件列表生成完成");
 
-                        sender.sendMessage(ChatColor.AQUA + "Uploading plugin list...");
+                        sender.sendMessage(ChatColor.AQUA + "正在上传插件列表...");
                         String pluginsLink = MCDebug.paste("plugins.txt", plugins);
-                        sender.sendMessage(ChatColor.AQUA + "Uploaded plugin list");
+                        sender.sendMessage(ChatColor.AQUA + "已上传插件列表");
 
-                        sender.sendMessage(ChatColor.AQUA + "Uploading data to MC Debug...");
+                        sender.sendMessage(ChatColor.AQUA + "正在上传数据到 MC Debug...");
                         String finalLinks = uploadDebugData(configLink, dataLink, messagesLink, pluginsLink);
                         String[] links = null;
                         if (finalLinks != null) {
                             links = finalLinks.split("\\|");
                         }
 
-                        sender.sendMessage(ChatColor.GREEN + "Completed uploading debug data!");
+                        sender.sendMessage(ChatColor.GREEN + "调试数据上传完成！");
                         if (links != null && links.length == 2) {
-                            sender.sendMessage(ChatColor.GREEN + "You can use the following link to manage your data " + ChatColor.GOLD + links[1]);
-                            sender.sendMessage(ChatColor.GREEN + "You can use the following link to share your data " + ChatColor.GOLD + links[0]);
+                            sender.sendMessage(ChatColor.GREEN + "您可以使用以下链接管理数据 " + ChatColor.GOLD + links[1]);
+                            sender.sendMessage(ChatColor.GREEN + "您可以使用以下链接分享数据 " + ChatColor.GOLD + links[0]);
                         } else {
-                            sender.sendMessage(ChatColor.GREEN + "You can use the following link to share your data " + ChatColor.GOLD + finalLinks);
+                            sender.sendMessage(ChatColor.GREEN + "您可以使用以下链接分享数据 " + ChatColor.GOLD + finalLinks);
                         }
 
                     });
@@ -154,26 +154,26 @@ public class CrateCommand implements CommandExecutor {
                 case "openers":
                     if (args.length > 1) {
                         if (args.length < 3) {
-                            sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.RED + "Correct usage: /" + string + " " + args[0] + " <crate> <opener>");
+                            sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.RED + "正确用法: /" + string + " " + args[0] + " <宝箱名称> <开启方式>");
                         } else {
                             if (CratesPlus.getOpenHandler().openerExist(args[2])) {
                                 Opener opener = CratesPlus.getOpenHandler().getOpener(args[2]);
                                 if (cratesPlus.getConfigHandler().getCrate(args[1].toLowerCase()) == null) {
-                                    sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.RED + "No crate exists with that name");
+                                    sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.RED + "该名称的宝箱不存在");
                                 } else if (!cratesPlus.getConfigHandler().getCrate(args[1].toLowerCase()).supportsOpener(opener)) {
-                                    sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.RED + "Opener does not support crate type");
+                                    sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.RED + "开启方式不支持此宝箱类型");
                                 } else {
 //									cratesPlus.getConfigHandler().getCrate(args[1].toLowerCase()).setOpener(args[2]);
-                                    sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.GREEN + "Set opener to " + args[2]);
+                                    sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.GREEN + "已将开启方式设置为 " + args[2]);
                                 }
                             } else {
-                                sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.RED + "No opener is registered with that name");
+                                sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.RED + "该名称的开启方式未注册");
                             }
                         }
 
                     } else {
-                        sender.sendMessage(ChatColor.GOLD + "Registered Openers:");
-                        sender.sendMessage(ChatColor.AQUA + "Name" + ChatColor.GRAY + " | " + ChatColor.YELLOW + "Plugin");
+                        sender.sendMessage(ChatColor.GOLD + "已注册的开启方式:");
+                        sender.sendMessage(ChatColor.AQUA + "名称" + ChatColor.GRAY + " | " + ChatColor.YELLOW + "插件");
                         sender.sendMessage(ChatColor.AQUA + "");
                         for (Map.Entry<String, Opener> map : CratesPlus.getOpenHandler().getRegistered().entrySet()) {
                             sender.sendMessage(ChatColor.AQUA + map.getKey() + ChatColor.GRAY + " | " + ChatColor.YELLOW + map.getValue().getPlugin().getDescription().getName());
@@ -182,24 +182,24 @@ public class CrateCommand implements CommandExecutor {
                     break;
                 case "reload":
                     cratesPlus.reloadPlugin();
-                    sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.GREEN + "CratesPlus was reloaded - This feature is not fully supported and may not work correctly");
+                    sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.GREEN + "CratesPlus 已重新加载 - 此功能未完全支持，可能无法正常工作");
                     break;
                 case "settings":
                     if (!(sender instanceof Player)) {
-                        sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.RED + "This command must be ran as a player");
+                        sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.RED + "此命令必须以玩家身份执行");
                         return false;
                     }
                     cratesPlus.getSettingsHandler().openSettings((Player) sender);
                     break;
                 case "create":
-                    // TODO Handle different crate types lol, default is KeyCrate for now
+                    // TODO 处理不同的宝箱类型，目前默认为 KeyCrate
                     if (sender instanceof Player && args.length < 2) {
-                        // Lets try and open a sign to do the name! :D
+                        // 尝试打开牌子来输入名称！
                         player = (Player) sender;
 
                         cratesPlus.addCreating(player.getUniqueId());
                         try {
-                            //Send fake sign cause 1.13
+                            // 发送虚假牌子（1.13+）
                             player.sendBlockChange(player.getLocation(), Material.valueOf("SIGN"), (byte) 0);
 
                             Constructor signConstructor = ReflectionUtil.getNMSClass("PacketPlayOutOpenSignEditor").getConstructor(ReflectionUtil.getNMSClass("BlockPosition"));
@@ -216,28 +216,28 @@ public class CrateCommand implements CommandExecutor {
                     }
 
                     if (args.length < 2) {
-                        sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.RED + "Correct Usage: /crate create <name>");
+                        sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.RED + "正确用法: /crate create <名称>");
                         return false;
                     }
 
                     String name = args[1];
                     FileConfiguration config = cratesPlus.getConfig();
                     if (config.isSet("Crates." + name)) {
-                        sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.RED + name + " crate already exists");
+                        sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.RED + name + " 宝箱已存在");
                         return false;
                     }
 
-                    // Setup example item
+                    // 设置示例物品
                     config.set("Crates." + name + ".Winnings.1.Type", "ITEM");
                     config.set("Crates." + name + ".Winnings.1.Item Type", "IRON_SWORD");
                     config.set("Crates." + name + ".Winnings.1.Item Data", 0);
                     config.set("Crates." + name + ".Winnings.1.Percentage", 0);
-                    config.set("Crates." + name + ".Winnings.1.Name", "&6&lExample Sword");
+                    config.set("Crates." + name + ".Winnings.1.Name", "&6&l示例剑");
                     config.set("Crates." + name + ".Winnings.1.Amount", 1);
 
-                    // Setup key with defaults
+                    // 设置默认钥匙
                     config.set("Crates." + name + ".Key.Item", "TRIPWIRE_HOOK");
-                    config.set("Crates." + name + ".Key.Name", "%type% Crate Key");
+                    config.set("Crates." + name + ".Key.Name", "%type% 宝箱钥匙");
                     config.set("Crates." + name + ".Key.Enchanted", true);
 
                     config.set("Crates." + name + ".Knockback", 0.0);
@@ -253,11 +253,11 @@ public class CrateCommand implements CommandExecutor {
                     cratesPlus.getConfigHandler().registerCrate(cratesPlus, config, name);
                     cratesPlus.getSettingsHandler().setupCratesInventory();
 
-                    sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.GREEN + name + " crate has been created");
+                    sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.GREEN + name + " 宝箱已创建");
                     break;
                 case "rename":
                     if (args.length < 3) {
-                        sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.RED + "Correct Usage: /crate rename <old name> <new name>");
+                        sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.RED + "正确用法: /crate rename <旧名称> <新名称>");
                         return false;
                     }
 
@@ -265,14 +265,14 @@ public class CrateCommand implements CommandExecutor {
                     String newName = args[2];
 
                     if (!cratesPlus.getConfigHandler().getCrates().containsKey(oldName.toLowerCase())) {
-                        sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.RED + oldName + " crate was not found");
+                        sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.RED + oldName + " 宝箱未找到");
                         return false;
                     }
                     Crate crate = cratesPlus.getConfigHandler().getCrates().get(oldName.toLowerCase());
 
                     config = cratesPlus.getConfig();
                     if (config.isSet("Crates." + newName)) {
-                        sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.RED + newName + " crate already exists");
+                        sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.RED + newName + " 宝箱已存在");
                         return false;
                     }
 
@@ -286,18 +286,18 @@ public class CrateCommand implements CommandExecutor {
                     cratesPlus.getConfigHandler().registerCrate(cratesPlus, config, newName);
                     cratesPlus.getSettingsHandler().setupCratesInventory();
 
-                    sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.GREEN + oldName + " has been renamed to " + newName);
+                    sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.GREEN + oldName + " 已重命名为 " + newName);
                     break;
                 case "delete":
                     if (args.length < 2) {
-                        sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.RED + "Correct Usage: /crate delete <name>");
+                        sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.RED + "正确用法: /crate delete <名称>");
                         return false;
                     }
 
                     name = args[1];
                     config = cratesPlus.getConfig();
                     if (!config.isSet("Crates." + name)) {
-                        sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.RED + name + " crate doesn't exist");
+                        sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.RED + name + " 宝箱不存在");
                         return false;
                     }
 
@@ -307,11 +307,11 @@ public class CrateCommand implements CommandExecutor {
                     cratesPlus.getConfigHandler().getCrates().remove(name.toLowerCase());
                     cratesPlus.getSettingsHandler().setupCratesInventory();
 
-                    sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.GREEN + name + " crate has been deleted");
+                    sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.GREEN + name + " 宝箱已删除");
                     break;
                 case "mysterygui":
                     if (args.length < 2) {
-                        sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.RED + "Correct Usage: /crate mysterygui <crate>");
+                        sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.RED + "正确用法: /crate mysterygui <宝箱名称>");
                         return false;
                     }
 
@@ -319,25 +319,25 @@ public class CrateCommand implements CommandExecutor {
 
                     crate = cratesPlus.getConfigHandler().getCrates().get(crateType.toLowerCase());
                     if (crate == null) {
-                        sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.RED + "Crate not found");
+                        sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.RED + "未找到该宝箱");
                         return false;
                     }
 
-                    if (!(crate instanceof MysteryCrate) || !(sender instanceof Player)) { // Too lazy to do separate messages
-                        sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.RED + "Crate is not a Mystery Crate!");
+                    if (!(crate instanceof MysteryCrate) || !(sender instanceof Player)) { // 懒得分开写消息了
+                        sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.RED + "该宝箱不是神秘宝箱！");
                         return false;
                     }
 
                     ((MysteryCrate) crate).openGUI((Player) sender);
                     break;
                 case "key":
-                    cratesPlus.getLogger().warning("\"/crate key\" was used but is deprecated from version 5, please use \"give\" instead.");
+                    cratesPlus.getLogger().warning("\"/crate key\" 已从版本 5 弃用，请改用 \"give\"。");
                     if (sender instanceof Player) {
-                        sender.sendMessage("\"/crate key\" was used but is deprecated from version 5, please use \"give\" instead.");
+                        sender.sendMessage("\"/crate key\" 已从版本 5 弃用，请改用 \"give\"。");
                     }
                 case "give":
                     if (args.length < 3) {
-                        sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.RED + "Correct Usage: /crate give <player/all/alloffline> <crate> [amount]");
+                        sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.RED + "正确用法: /crate give <玩家名称/all/alloffline> <宝箱名称> [数量]");
                         return false;
                     }
 
@@ -346,7 +346,7 @@ public class CrateCommand implements CommandExecutor {
                         try {
                             amount = Integer.parseInt(args[3]);
                         } catch (Exception ignored) {
-                            sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.RED + "Invalid amount");
+                            sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.RED + "无效的数量");
                             return false;
                         }
                     }
@@ -354,8 +354,8 @@ public class CrateCommand implements CommandExecutor {
                     OfflinePlayer offlinePlayer = null;
                     if (!args[1].equalsIgnoreCase("all") && !args[1].equalsIgnoreCase("alloffline")) {
                         offlinePlayer = Bukkit.getOfflinePlayer(args[1]);
-                        if (offlinePlayer == null || (!offlinePlayer.hasPlayedBefore() && !offlinePlayer.isOnline())) { // Check if the player is online as "hasPlayedBefore" doesn't work until they disconnect?
-                            sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.RED + "The player " + args[1] + " was not found");
+                        if (offlinePlayer == null || (!offlinePlayer.hasPlayedBefore() && !offlinePlayer.isOnline())) { // 检查玩家是否在线，因为"hasPlayedBefore"直到他们断开连接才起作用？
+                            sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.RED + "玩家 " + args[1] + " 未找到");
                             return false;
                         }
                     }
@@ -364,33 +364,33 @@ public class CrateCommand implements CommandExecutor {
 
                     crate = cratesPlus.getConfigHandler().getCrates().get(crateType.toLowerCase());
                     if (crate == null) {
-                        sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.RED + "Crate not found");
+                        sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.RED + "未找到该宝箱");
                         return false;
                     }
 
                     if (offlinePlayer == null) {
                         if (args[1].equalsIgnoreCase("all")) {
                             crate.giveAll(amount);
-                            sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.GREEN + "Given all online players a crate/key");
+                            sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.GREEN + "已给予所有在线玩家宝箱/钥匙");
                         } else if (args[1].equalsIgnoreCase("alloffline")) {
                             /**
-                             * TODO TEST THIS and maybe give better explanation when they do `/crate give`?
+                             * TODO 测试这个，并在他们执行 `/crate give` 时提供更好的说明？
                              */
                             crate.giveAllOffline(amount);
-                            sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.GREEN + "Given all online and offline players a crate/key");
+                            sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.GREEN + "已给予所有在线和离线玩家宝箱/钥匙");
                         }
                     } else {
                         if (crate.give(offlinePlayer, amount))
-                            sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.GREEN + "Given " + offlinePlayer.getName() + " a crate/key");
+                            sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.GREEN + "已给予 " + offlinePlayer.getName() + " 宝箱/钥匙");
                         else
-                            sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.RED + "Failed to give crate/key");
+                            sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.RED + "给予宝箱/钥匙失败");
                     }
 
                     break;
                 case "crate":
                 case "keycrate":
                     if (args.length == 1) {
-                        sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.RED + "Correct Usage: /crate crate <type> [player]");
+                        sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.RED + "正确用法: /crate crate <类型> [玩家]");
                         return false;
                     }
 
@@ -399,48 +399,48 @@ public class CrateCommand implements CommandExecutor {
                     } else if (sender instanceof Player) {
                         player = (Player) sender;
                     } else {
-                        sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.RED + "Correct Usage: /crate crate <type> [player]");
+                        sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.RED + "正确用法: /crate crate <类型> [玩家]");
                         return false;
                     }
 
                     if (player == null) {
-                        sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.RED + "The player " + args[2] + " was not found");
+                        sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.RED + "玩家 " + args[2] + " 未找到");
                         return false;
                     }
 
                     try {
                         crateType = args[1];
                     } catch (IllegalArgumentException e) {
-                        sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.RED + "Please specify a valid crate type");
+                        sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.RED + "请指定一个有效的宝箱类型");
                         return false;
                     }
 
                     if (cratesPlus.getConfigHandler().getCrates().get(crateType.toLowerCase()) == null || !(cratesPlus.getConfigHandler().getCrates().get(crateType.toLowerCase()) instanceof KeyCrate)) {
-                        sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.RED + "KeyCrate not found");
+                        sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.RED + "未找到该类型的钥匙宝箱");
                         return false;
                     }
 
                     cratesPlus.getCrateHandler().giveCrate(player, crateType);
 
-                    sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.GREEN + "Given " + player.getDisplayName() + ChatColor.RESET + ChatColor.GREEN + " a crate");
+                    sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.GREEN + "已给予 " + player.getDisplayName() + ChatColor.RESET + ChatColor.GREEN + " 一个宝箱");
                     break;
             }
         } else {
 
-            // Help Messages
-            sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.AQUA + "----- CratePlus v" + cratesPlus.getDescription().getVersion() + " Help -----");
-            sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.AQUA + "/crate reload " + ChatColor.YELLOW + "Reload configuration for CratesPlus (Experimental)");
-//			sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.AQUA + "/crate settings " + ChatColor.YELLOW + "Edit settings of CratesPlus and crate winnings");
-            sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.AQUA + "/crate create <name> " + ChatColor.YELLOW + "Create a new crate");
-            sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.AQUA + "/crate rename <old name> <new name> " + ChatColor.YELLOW + "Rename a crate");
-            sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.AQUA + "/crate delete <name> " + ChatColor.YELLOW + "Delete a crate");
-            sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.AQUA + "/crate give <player/all> [crate] [amount] " + ChatColor.YELLOW + "Give player a crate/key, if no crate given it will be random");
-            sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.AQUA + "/crate crate <type> [player] " + ChatColor.YELLOW + "Give player a crate to be placed, for use by admins");
-            sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.AQUA + "/crate debug " + ChatColor.YELLOW + "Generates a debug link for sending info about your server and config");
-//			sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.AQUA + "/crate claim " + ChatColor.YELLOW + "Claim any keys that are waiting for you");
+            // 帮助信息
+            sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.AQUA + "----- CratePlus v" + cratesPlus.getDescription().getVersion() + " 帮助 -----");
+            sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.AQUA + "/crate reload " + ChatColor.YELLOW + "重新加载 CratesPlus 配置（实验性）");
+//			sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.AQUA + "/crate settings " + ChatColor.YELLOW + "编辑 CratesPlus 设置和宝箱奖励");
+            sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.AQUA + "/crate create <名称> " + ChatColor.YELLOW + "创建一个新宝箱");
+            sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.AQUA + "/crate rename <旧名称> <新名称> " + ChatColor.YELLOW + "重命名一个宝箱");
+            sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.AQUA + "/crate delete <名称> " + ChatColor.YELLOW + "删除一个宝箱");
+            sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.AQUA + "/crate give <玩家/all> [宝箱] [数量] " + ChatColor.YELLOW + "给予玩家宝箱/钥匙，未指定宝箱则随机");
+            sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.AQUA + "/crate crate <类型> [玩家] " + ChatColor.YELLOW + "给予玩家一个可放置的宝箱，供管理员使用");
+            sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.AQUA + "/crate debug " + ChatColor.YELLOW + "生成调试链接，用于发送服务器和配置信息");
+//			sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.AQUA + "/crate claim " + ChatColor.YELLOW + "领取等待您的钥匙");
 
 
-            //			sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.AQUA + "/crate opener <name/type> <opener> " + ChatColor.YELLOW + "- Change the opener for a specific crate or crate type");
+            //			sender.sendMessage(cratesPlus.getPluginPrefix() + ChatColor.AQUA + "/crate opener <名称/类型> <开启方式> " + ChatColor.YELLOW + "- 更改特定宝箱或宝箱类型的开启方式");
         }
 
         return true;
@@ -449,10 +449,10 @@ public class CrateCommand implements CommandExecutor {
     private void doClaim(Player player) {
         if (!cratesPlus.getCrateHandler().hasPendingKeys(player.getUniqueId())) {
             player.closeInventory();
-            player.sendMessage(ChatColor.RED + "You currently don't have any keys to claim");
+            player.sendMessage(ChatColor.RED + "您目前没有任何钥匙可以领取");
             return;
         }
-        GUI gui = new GUI("Claim Crate Keys");
+        GUI gui = new GUI("领取宝箱钥匙");
         Integer i = 0;
         for (Map.Entry<String, Integer> map : cratesPlus.getCrateHandler().getPendingKey(player.getUniqueId()).entrySet()) {
             final String crateName = map.getKey();

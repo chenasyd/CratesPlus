@@ -36,14 +36,14 @@ public class OpenHandler {
 
     public void registerOpener(Opener opener) {
         if (registered.containsKey(opener.getName())) {
-            getCratesPlus().getLogger().warning("An opener with the name \"" + opener.getName() + "\" already exists and will not be registered");
+            getCratesPlus().getLogger().warning("名为 \"" + opener.getName() + "\" 的开启方式已存在，将不会注册");
             return;
         }
         try {
             opener.doSetup();
             registered.put(opener.getName(), opener);
             if (getCratesPlus().getConfigHandler().isDebugMode())
-                getCratesPlus().getLogger().info("[DEBUG] Opener \"" + opener.getName() + "\" has been registered");
+                getCratesPlus().getLogger().info("[DEBUG] 开启方式 \"" + opener.getName() + "\" 已注册");
         } catch (Exception e) {
             e.printStackTrace();
         }

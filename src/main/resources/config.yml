@@ -1,56 +1,56 @@
 # [][][][][][][][][][][][][][][][][][][][][]
-#  CratesPlus V${project.version} Config
+#  CratesPlus V${project.version} 配置文件
 # [][][][][][][][][][][][][][][][][][][][][]
 # ------------------------------------------
-# There are many placeholders that can now be used withing the config and messages file, placeholders are as followed:
-# - %name% - Replaces with the players name, Example: "Notch".
-# - %displayname% - Replaces with the players display name, Example: "[Owner] Notch".
-# - %uuid% - Replaces with the players UUID.
-# - %crate% - The crate types name.
-# - %prize% - The name of the winning.
-# - %percentage% - Percentage of the winning, useful for "Chance Message".
-# - %rand;100;500% - Generates a random number between two numbers, example is between 100 and 500.
+# 现在可以在配置文件和消息文件中使用以下占位符:
+# - %name% - 替换为玩家名称，例如："Notch"。
+# - %displayname% - 替换为玩家的显示名称，例如："[Owner] Notch"。
+# - %uuid% - 替换为玩家的 UUID。
+# - %crate% - 宝箱类型的名称。
+# - %prize% - 奖励的名称。
+# - %percentage% - 奖励的百分比，用于"概率提示"。
+# - %rand;100;500% - 生成两个数字之间的随机数，示例在 100 和 500 之间。
 # ------------------------------------------
-# Don't change the config version!
+# 请勿修改配置版本号！
 
 Config Version: 7
 
-# Plugin Prefix
+# 插件前缀
 Prefix: "&7[&bCratesPlus&7]"
 
-# Checks if an update is available and notifies staff
+# 检查是否有可用更新并通知管理员
 Update Checks: true
 Update Branch: "release"
 
-# Uploads anonymous data about your server, used for general statics
+# 上传匿名的服务器数据，用于统计数据
 Metrics: true
 
 Crates:
 
-# Opener which is used by default
+# 默认使用的开启方式
 Default Opener: BasicGUI
 
-# Default cooldown between opening crates
+# 打开宝箱之间的默认冷却时间
 Default Cooldown: 5
 
-# If true it will stop players without the admin perm breaking crates
+# 如果为 true，将阻止没有管理员权限的玩家破坏宝箱
 Crate Protection: false
 
-# Disable players being allowed to drop keys to other players, putting them in a chest, or even drop them on death
+# 禁止玩家将钥匙丢给其他玩家、放入箱子或在死亡时掉落
 Disable Key Swapping: false
 
 Chance Message Gap: true
 
-# %crate% can be used to show the crate name
+# %crate% 可用于显示宝箱名称
 Default Hologram Text:
 - "%crate%"
-- "Right-Click to Open!"
-- "Left-Click to Preview!"
+- "&e右键点击打开！"
+- "&e左键点击预览！"
 
-# What type of storage system to use. Supports FLAT, SQLite or MySQL.
+# 使用哪种存储系统。支持 FLAT、SQLite 或 MySQL
 Storage Type: FLAT
 
-# Only required if the above is set to MySQL
+# 仅当上方设置为 MySQL 时才需要
 MySQL Host: localhost
 MySQL User: username
 MySQL Pass: password

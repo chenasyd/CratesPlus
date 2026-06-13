@@ -28,8 +28,8 @@ public class BasicGUIOpener extends Opener implements Listener {
     private HashMap<UUID, Integer> tasks = new HashMap<>();
     private HashMap<UUID, Inventory> guis = new HashMap<>();
     private int length = 5;
-    private String rollingText = "Rolling...";
-    private String winnerText = "Winner!";
+    private String rollingText = "抽奖中...";
+    private String winnerText = "中奖！";
     private boolean sound = true;
 
     public BasicGUIOpener(CratesPlus cratesPlus) {
@@ -51,7 +51,7 @@ public class BasicGUIOpener extends Opener implements Listener {
         }
 
         if (!config.isSet("Rolling Text")) {
-            config.set("Rolling Text", "Rolling...");
+            config.set("Rolling Text", "抽奖中...");
             try {
                 config.save(getOpenerConfigFile());
             } catch (IOException e) {
@@ -61,7 +61,7 @@ public class BasicGUIOpener extends Opener implements Listener {
         }
 
         if (!config.isSet("Winner Text")) {
-            config.set("Winner Text", "Winner!");
+            config.set("Winner Text", "中奖！");
             try {
                 config.save(getOpenerConfigFile());
             } catch (IOException e) {

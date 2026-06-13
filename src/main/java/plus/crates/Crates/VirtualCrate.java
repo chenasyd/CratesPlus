@@ -23,16 +23,16 @@ public class VirtualCrate extends Crate {
             for (String key : getCratesPlus().getConfig().getStringList("Crates." + name + ".Crates")) {
                 Crate crate = getConfigHandler().getCrate(key.toLowerCase());
                 if (crate == null) {
-                    getCratesPlus().getLogger().warning("Failed to find crate \"" + key + "\"");
+                    getCratesPlus().getLogger().warning("未找到宝箱 \"" + key + "\"");
 //                } else if (!(crate instanceof KeyCrate || crate instanceof MysteryCrate)) {
                 } else if (!(crate instanceof KeyCrate)) { // KeyCrate support only for now
-                    getCratesPlus().getLogger().warning("Crate \"" + key + "\" is not supported by Virtual Crates");
+                    getCratesPlus().getLogger().warning("VirtualCrates 不支持宝箱 \"" + key + "\"");
                 } else {
                     crates.add(key.toLowerCase());
                 }
             }
         } else {
-            getCratesPlus().getLogger().warning("No crates have been defined for \"" + getName() + "\"");
+            getCratesPlus().getLogger().warning("未为 \"" + getName() + "\" 定义任何宝箱");
         }
     }
 
@@ -52,7 +52,7 @@ public class VirtualCrate extends Crate {
                 @Override
                 public void doClick(Player player, GUI gui) {
                     // TODO
-                    player.sendMessage(ChatColor.YELLOW + "// TODO");
+                    player.sendMessage(ChatColor.YELLOW + "// 功能开发中");
                 }
             });
         }

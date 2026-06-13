@@ -49,7 +49,7 @@ public class BlockListeners implements Listener {
             title = key.getName();
 
             if (item.hasItemMeta() && item.getItemMeta().hasDisplayName() && item.getItemMeta().getDisplayName().contains(title)) {
-                MessageHandler.sendMessage(event.getPlayer(), "&cYou can not drop crate keys", crate.getValue(), null);
+                MessageHandler.sendMessage(event.getPlayer(), "&c您不能丢弃宝箱钥匙", crate.getValue(), null);
                 event.setCancelled(true);
                 return;
             }
@@ -137,7 +137,7 @@ public class BlockListeners implements Listener {
 
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
-        if (!cratesPlus.getConfigHandler().isDisableKeySwapping() || event.getView().getTitle().equals("Claim Crate Keys"))
+        if (!cratesPlus.getConfigHandler().isDisableKeySwapping() || event.getView().getTitle().equals("领取宝箱钥匙"))
             return;
         if (!event.getInventory().getType().toString().contains("PLAYER") && event.getCurrentItem() != null) {
             String title;
@@ -183,14 +183,14 @@ public class BlockListeners implements Listener {
             }
 
             if (item.hasItemMeta() && item.getItemMeta().hasDisplayName() && item.getItemMeta().getDisplayName().contains(title)) {
-                MessageHandler.sendMessage(event.getPlayer(), "&cYou can not place crate keys", crate.getValue(), null);
+                MessageHandler.sendMessage(event.getPlayer(), "&c您不能放置宝箱钥匙", crate.getValue(), null);
                 event.setCancelled(true);
                 return;
             }
         }
 
-        if (item.hasItemMeta() && item.getItemMeta().hasDisplayName() && item.getItemMeta().getDisplayName().contains("Crate")) {
-            final String crateType = item.getItemMeta().getDisplayName().replaceAll(" Crate", "");
+        if (item.hasItemMeta() && item.getItemMeta().hasDisplayName() && item.getItemMeta().getDisplayName().contains("宝箱")) {
+            final String crateType = item.getItemMeta().getDisplayName().replaceAll(" 宝箱", "");
             final Crate crate = cratesPlus.getConfigHandler().getCrate(ChatColor.stripColor(crateType).toLowerCase());
 
             if (crate instanceof MysteryCrate) {
@@ -279,7 +279,7 @@ public class BlockListeners implements Listener {
         }
         String crateType = event.getBlock().getMetadata("CrateType").get(0).asString();
         Crate crate = cratesPlus.getConfigHandler().getCrates().get(crateType.toLowerCase());
-        if (crate == null) // TODO Better handling of crates removed from the config
+        if (crate == null) // TODO 更好地处理从配置中移除的宝箱
             return;
         if (!(crate instanceof KeyCrate)) {
             return;
@@ -288,11 +288,11 @@ public class BlockListeners implements Listener {
         Location location = event.getBlock().getLocation();
 
         if (event.getPlayer().isSneaking() && (cratesPlus.getConfig().getBoolean("Crate Protection") && !event.getPlayer().hasPermission("cratesplus.admin"))) {
-            event.getPlayer().sendMessage(cratesPlus.getPluginPrefix() + ChatColor.RED + "You do not have permission to remove this crate");
+            event.getPlayer().sendMessage(cratesPlus.getPluginPrefix() + ChatColor.RED + "您没有权限移除这个宝箱");
             event.setCancelled(true);
             return;
         } else if (!event.getPlayer().isSneaking()) {
-            event.getPlayer().sendMessage(cratesPlus.getPluginPrefix() + ChatColor.RED + "Sneak to break crates");
+            event.getPlayer().sendMessage(cratesPlus.getPluginPrefix() + ChatColor.RED + "请潜行来破坏宝箱");
             event.setCancelled(true);
             return;
         }

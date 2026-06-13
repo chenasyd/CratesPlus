@@ -177,7 +177,7 @@ public class ConfigHandler {
                     addCrate(crateName.toLowerCase(), new MysteryCrate(this, crateName));
                     break;
                 default:
-                    cratesPlus.getLogger().warning("Invalid \"Type\" set for crate \"" + crateName + "\"");
+                    cratesPlus.getLogger().warning("宝箱 \"" + crateName + "\" 设置了无效的\"Type\"");
                     break;
             }
         }
